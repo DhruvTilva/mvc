@@ -1,0 +1,42 @@
+<?php 
+// echo "<pre>";
+// $admin=$this->admin;
+// print_r($this);
+// print_r($this->data['admin']->admin_id);
+$url=Ccc::getModel('Core_Url');
+// print_r($url);
+// die();
+ ?>
+ <?php require_once 'View/html/header.phtml'; ?>
+
+            <h2>Edit Admins</h2>
+
+	<form action="<?php echo ($url->getUrl('admin','update',['id'=>$this->data['admin']->admin_id]));?>" method="post">
+	<table width="100%" border="1" cellpadding="4">
+		<tr>
+	<input type="submit" name="submit" value="Save">
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td><input type="text" name="admin[email]" value="<?php echo $this->data['admin']->email;?>">
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><input type="text" name="admin[password]" value="<?php echo $this->data['admin']->password;?>">
+		</tr>
+
+		<td>Status</td>
+		<td>
+			<select name="admin[status]">
+			<option value="1" <?php if($this->data['admin']->status==1){echo "selected";}?>>Active</option>
+			<option value="2" <?php if($this->data['admin']->status==2){echo "selected";}?>>Active</option>
+		</select>
+	</td>
+</tr>
+
+	</table>
+ <?php require_once 'View/html/footer.phtml'; ?>
+	
+
+
+</form>

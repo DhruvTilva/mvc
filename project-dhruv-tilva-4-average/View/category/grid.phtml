@@ -1,0 +1,68 @@
+<?php 
+// $categories=$this->categories;
+$categorys = $this->category;
+
+$url=Ccc::getModel('Core_Url');
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+    <style>
+        .content-main{
+        border: 1px solid grey;
+        min-height: 500px;
+        height: auto;
+        }
+    </style>
+</head>
+<body>
+	<?php require_once 'View/html/header.phtml' ?>
+    <div class="content-main">
+        <div class="content">
+            <h2>Manage Category</h2>
+            <a href="<?php echo ($url->getUrl('category','add'));?>">Add Category</a>
+        </div>
+        <div>
+            <table border="1px">
+                <tr>
+                    <th style="width : 150px">Category_id</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>inserted_at</th>
+                    <th>updated_at</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <?php
+               foreach($categorys as $row){
+
+                ?>
+                <tr>
+                    <td><?php echo $row->category_id; ?></td>
+                    <td><?php echo $row->name;?></td>
+                    <td><?php echo $row->getStatusText(); ?></td>
+                    <td><?php echo $row->description; ?></td>
+                    <td><?php echo $row->inserted_at; ?></td>
+                    <td><?php echo $row->updated_at; ?></td>
+                    <td><a href="<?php echo ($url->getUrl('category','edit',['id'=>$row->category_id]));?>">edit</a></td>
+                    <td><a href="<?php echo ($url->getUrl('category','delete',['id'=>$row->category_id]));?>">delete</a></td>
+                </tr>
+                <?php
+                }
+                ?>
+            </table>
+        </div>
+    </div>
+    <?php require_once 'View/html/footer.phtml';?>
+</body>
+
+</html>

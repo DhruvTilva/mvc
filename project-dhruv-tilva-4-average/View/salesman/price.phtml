@@ -1,0 +1,93 @@
+<?php 
+
+$products = $this->getProducts();
+$salesmen = $this->getSalesmen();
+
+$select = $this->selectID;
+
+$request = $this->getRequest();
+$selectedID = (int) $request->getParams('id');
+
+if(!$selectedID){
+	throw new Exception("Invalid ID.", 1);	
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesman</title>
+    
+</head>
+<body>
+	<?php require_once 'View/html/header.phtml'; ?>
+	<div class="content-main">
+			<table width="100%">
+				<tr>
+					<td width="80%">
+						<form method="post">
+							<h3>Salesmen:
+								<select name="select" onchange="this.form.submit();">
+									<?php foreach ($salesmen as $salesman): ?>
+										<option value="<?php echo $salesman['salesman_id'] ?>"
+											<?php 
+											if(isset($select)){
+												if($select){
+													if($salesman['salesman_id'] == $select){
+														echo "selected";
+													}
+												}
+											}
+											elseif($salesman['salesman_id'] == $selectedID){
+												echo "selected";
+											} 
+											?>>
+											<?php echo $salesman['firstname']; ?>
+										</option>
+									<?php endforeach;?>
+								</select>
+							</h3>
+						</form>
+					</td>
+		<form action="Index.php?c=Sprice&a=update&id=<?php if($select){ echo $select;} else{echo $selectedID;} ?>" method="post">
+					<td><button type="submit">Update</button></td>
+										
+				</tr>
+			</table>
+			<table border="2px" width="100%">
+				<tr>
+					<th>ProductID</th>
+					<th>Name</th>
+					<th>SKU</th>
+					<th>Cost</th>
+					<th>Price</th>
+					<th>Salesman_Price</th>
+					
+				</tr>
+				
+					<?php foreach($products as $product):?>
+						<tr>
+							<td><center><?php echo $product['product_id'] ?></center></td>
+							
+							<td><center><?php echo $product['name'] ?></center></td>
+							<td><center><?php echo $product['sku'] ?></center></td>
+							<td><center><?php echo $product['cost'] ?></center></td>
+							<td><center><?php echo $product['price'] ?></center></td>
+							<td><center><input type="number" name="sPrice[<?php echo $product['product_id'] ?>]" value="<?php echo $product['salesman_price'] ?>"></center></td>
+							
+						</tr>
+					<?php endforeach;?>
+				
+			</table>
+		</form>
+	</div>
+	<?php require_once 'View/html/footer.phtml'; ?>
+</body>
+</html>

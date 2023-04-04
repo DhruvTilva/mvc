@@ -1,0 +1,125 @@
+<?php
+// require_once 'Model/Core/Url.php';
+
+// $salesman=$this->getSalesmans();
+$url = new Model_Core_Url();
+$salesman = $this->salesman;
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Salesman</title>
+    
+</head>
+
+<body>
+    <?php require_once 'View/html/header.phtml' ?>
+    <div class="content-main">
+        <form action="<?php echo ($url->getUrl('salesman','save',['id'=>$salesman->salesman_id]));?>" method="post">
+            <table>
+                <tr>
+                    <td>
+                        <h1>Save Salesman</h1>
+                    </td>
+                    <td class="sub-head">
+                        <a href="<?php echo ($url->getUrl('salesman','grid'));?>">Cancel</a>
+                        <button type="submit">Save</button>
+                    </td>
+                </tr>
+            </table>
+            <table border="2px" style="border-collapse: collapse">
+            
+            
+                <tr>
+                    <td>salesman_id: </td>
+                    <td><?php echo $salesman->salesman_id;?></td>
+                </tr>
+                <tr>
+                    <td>First_name: </td>
+                    <td><input type="text" name="salesman[firstname]" value="<?php echo $salesman->firstname;?>"></td>
+                </tr>
+                <tr>
+                    <td>Last_name: </td>
+                    <td><input type="text" name="salesman[lastname]" value="<?php echo $salesman->lastname;?>"></td>
+                </tr>
+                <tr>
+                    <td>Email: </td>
+                    <td><input type="email" name="salesman[email]" value="<?php echo $salesman->email;?>"></td>
+                </tr>
+                <tr>
+                    <td>Gender: </td>
+                    <td>
+                        <input type="radio" name="salesman[gender]" value="<?php echo $salesman->gender;?>">Male <br>
+                        <input type="radio" name="salesman[gender]" value="<?php echo $salesman->gender;?>">Female <br>
+                        <!-- <input type="radio" name="gender">Other -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mobile: </td>
+                    <td><input type="number" name="salesman[mobile]" value="<?php echo $salesman->mobile;?>"></td>
+                </tr>
+                <tr>
+                    <td>Status: </td>
+                    <td>
+                        <select name="salesman[status]" id="" value="<?php echo $salesman->status;?>">
+                            <option value="1">Active</option>
+                            <option value="2">Inactive</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Company: </td>
+                    <td><input type="number" name="salesman[company]" value="<?php echo $salesman->company;?>"></td>
+                </tr>
+
+             
+            </table>
+            <table broder="2px" style="border-collapse: collapse">
+              
+            <tr>
+                <th colspan="2"><h3>Address</h3></th>
+            </tr>
+            <tr>
+                <td>Address_id:</td>
+                <td>
+                    <?php echo $salesman->address_id; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Address:
+                </td>
+                <td><textarea name="address[address]"><?php echo $salesman->address; ?></textarea></td>
+
+            </tr>
+            <tr>
+                <td>city:</td>
+                <td><input type="text" name="address[city]" value="<?php echo $salesman->city; ?>"></td>
+            </tr>
+            <tr>
+                <td>state:</td>
+                <td><input type="text" name="address[state]" value="<?php echo $salesman->state; ?>"></td>
+            </tr>
+            <tr>
+                <td>country:</td>
+                <td><input type="text" name="address[country]" value="<?php echo $salesman->country; ?>"></td>
+            </tr>
+            <tr>
+                <td>zipcode:</td>
+                <td><input type="text" name="address[zipcode]" value="<?php echo $salesman->zipcode; ?>"></td>
+            </tr>
+          
+            
+        </table>
+        </form>
+    </div>
+        <?php require_once 'View/html/footer.phtml'; ?>
+
+</body>
+
+</html>

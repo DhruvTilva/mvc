@@ -1,0 +1,94 @@
+<?php 
+// require_once 'Model/Core/Url.php';
+$url = new Model_Core_Url();
+// $product = $this->getProducts();
+$product = $this->product;
+// echo "<pre>";
+// print_r($this);
+// die;
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Products</title>
+</head>
+
+<body>
+    <?php require_once 'View/html/header.phtml' ?>
+    
+    <div class="content-main">
+        
+        <form action="<?php echo ($url->getUrl('product','save',['id'=>$product->product_id]));?>" method="post">
+        <table>
+            <tr>
+                <td>
+                    <h1>Save Product</h1>
+                </td>
+                <td class="sub-head">
+                    <button type="submit" >Save</button>
+                    <a href="<?php echo ($url->getUrl('product','grid'));?>">Cancel</a>
+                </td>
+            </tr>
+        </table>
+        <table border = "2px" style = "border-collapse : collapse;">
+           
+            <tr>
+                <td>Product_id: </td>
+                <td><?php echo $product->product_id;?></td>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td><input type="text" name="product[name]"  value="<?php echo $product->name;?>"></td>
+            </tr>
+            <tr>
+                <td>SKU: </td>
+                <td><input type="number" name="product[sku]" value="<?php echo $product->sku;?>"></td>
+            </tr>
+            <tr>
+                <td>Cost: </td>
+                <td><input type="number" name="product[cost]"  value="<?php echo $product->cost;?>"></td>
+            </tr>
+            <tr>
+                <td>Price: </td>
+                <td><input type="number" name="product[price]" value="<?php echo $product->price;?>"></td>
+            </tr>
+            <tr>
+                <td>Description: </td>
+                <td><textarea name="product[description]"cols="30" rows="10" ><?php echo $product->description;?></textarea></td>
+            </tr>
+            <tr>
+                <td>Status: </td>
+                <td>
+                    <select name="product[status]" >
+                        <?php foreach ($product->getTable()->getStatusOptions() as $key => $value): ?>
+                            <?php $selected = ($key == $product->getStatus()) ? 'selected':'' ?>
+                            <option <?php echo $selected; ?>><?php echo $value ?></option>
+                            <?php endforeach; ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Color: </td>
+                <td><input type="text" name="product[color]" value="<?php echo $product->color;?>"> </td>
+            </tr>
+            <tr>
+                <td>Material: </td>
+                <td><input type="text" name="product[material]" value="<?php echo $product->material;?>"> </td>
+            </tr>
+
+            
+        </table>
+        
+            
+        </form>
+    </div>
+        <?php require_once 'View/html/footer.phtml'; ?>
+
+</body>
+
+</html>

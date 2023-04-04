@@ -1,0 +1,47 @@
+<?php 
+// echo "<pre>";
+// print_r($this);
+// die();
+// $admins=$this->admins; 
+
+
+$url=Ccc::getModel('Core_Url');
+?>
+
+
+ <?php require_once 'View/html/header.phtml'; ?>
+
+<table width="100%" border="1" cellpadding="4">
+	<tr>
+		<td>Admin Id</td>
+		<td>Email</td>
+		<td>Status</td>
+		<td>Created At</td>
+		<td>Updated At</td>
+		<td>EDIT</td>
+		<td>DELETE</td>
+	</tr>
+	<div class="content">
+            <h2>Manage Admins</h2>
+            <a href="<?php echo ($url->getUrl('admin','add'));?>">Add Admins</a>
+        
+        </div>
+
+		<?php foreach($this->data['admins'] as $admin):?> 
+			<tr>
+				<td><?php echo $admin->admin_id;?></td>
+				<td><?php echo $admin->email;?></td>
+				<td><?php echo $admin->status;?></td>
+				<td><?php echo $admin->created_at;?></td>
+				<td><?php echo $admin->updated_at;?></td>
+				 <td><a href="<?php echo ($url->getUrl('admin','edit',['id'=>$admin->admin_id]));?>">edit</a></td>
+                    <td><a href="<?php echo ($url->getUrl('admin','delete',['id'=>$admin->admin_id]));?>">delete</a></td>
+			</tr>
+		<?php endforeach;?>
+
+
+			
+		
+	
+</table>
+ <?php require_once 'View/html/footer.phtml'; ?>

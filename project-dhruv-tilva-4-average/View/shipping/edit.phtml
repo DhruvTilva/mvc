@@ -1,0 +1,66 @@
+<?php
+
+$url = new Model_Core_Url();
+
+$shipping = $this->shipping;
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+
+<body>
+    <?php require_once 'View/html/header.phtml' ?>
+
+    <div class="content-main">
+        <form action="<?php echo ($url->getUrl('shipping','save',['id'=>$shipping['shipping_id']]));?>" method="post">
+            <table>
+                <tr>
+                    <td>
+                        <h1>Save Shipping Details</h1>
+                    </td>
+                    <td class="sub-head">
+                        <a href="<?php echo ($url->getUrl('shipping','grid'));?>">Cancel</a>
+                        <button type="submit">Save</button>
+                    </td>
+                </tr>
+            </table>
+            <table border="2px" style="border-collapse: collapse">
+           
+                <tr>
+                    <td>shipping_id: </td>
+                    <td><?php echo $shipping['shipping_id'];?></td>
+                </tr>
+                <tr>
+                    <td>Name: </td>
+                    <td><input type="text" name="shipping[name]"  value="<?php echo $shipping['name'];?>"></td>
+                </tr>
+                <tr>
+                    <td>Amount: </td>
+                    <td><input type="text" name="shipping[amount]"  value="<?php echo $shipping['amount'];?>"></td>
+                </tr>
+                
+                    <td>Status: </td>
+                    <td>
+                        <select name="shipping[status]" id="" value="<?php echo $shipping['amount'];?>" >
+                            <option value="1">Active</option>
+                            <option value="2">Inactive</option>
+                        </select>
+                    </td>
+                </tr>
+              
+                
+            </table>
+        </form>
+    </div>
+        <?php require_once 'View/html/footer.phtml'; ?>
+
+</body>
+
+</html>

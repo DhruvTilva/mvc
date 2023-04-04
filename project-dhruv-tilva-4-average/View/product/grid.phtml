@@ -1,0 +1,99 @@
+ <?php 
+// echo 111; die;
+ // echo"<pre>";
+ // print_r($this); die();
+ 
+// $products = $this->getProducts();
+$url=Ccc::getModel('Core_Url');
+$products = $this->products;
+
+// echo "<pre>";
+// print_r($this);
+// die();
+
+
+
+
+
+
+
+?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <style>
+        .content-main{
+        border: 1px solid grey;
+        min-height: 500px;
+        height: auto;
+        }
+    </style>
+</head>
+<body>
+    <?php require_once 'View/html/header.phtml'; ?>
+    <div class="content-main">
+        <div class="content">
+            <h2>Manage Product</h2>
+            <a href="<?php echo ($url->getUrl('product','add'));?>">Add Product</a>
+        
+        </div>
+        <div>
+            <table border="3px" width="80%">
+                <tr>
+                    <th>Product_id</th>
+                    <th>Name</th>
+                    <th>SKU</th>
+                    <th>Cost</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Color</th>
+                    <th>Material</th>
+                    <th>inserted_at</th>
+                    <th>updated_at</th>
+                    <th>Media</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+
+                <?php
+                //feching data to form from database
+                foreach($products as $row){
+
+                ?>
+
+                <tr>
+                    <!-- all attributes of database -->
+                    <td><?php echo $row->product_id; ?></td>
+                    <td><?php echo $row->name; ?></td>
+                    <td><?php echo $row->sku; ?></td>
+                    <td><?php echo $row->cost; ?></td>
+                    <td><?php echo $row->price; ?></td>
+                    <td><?php echo $row->description; ?></td>
+                    <td><?php echo $row->getStatusText(); ?></td>
+                    <td><?php echo $row->color; ?></td>
+                    <td><?php echo $row->material; ?></td>
+                    <td><?php echo $row->inserted_at; ?></td>
+                    <td><?php echo $row->updated_at; ?></td>
+                    <td><a href="Index.php?c=product_media&a=grid&id=<?php echo $row->product_id; ?>">ProductMedia</a></td>
+                    <td><a href="<?php echo ($url->getUrl('product','edit',['id'=>$row->product_id]));?>">edit</a></td>
+                    <td><a href="<?php echo ($url->getUrl('product','delete',['id'=>$row->product_id]));?>">delete</a></td>
+                </tr>
+                <?php
+                }
+                ?>
+            </table>
+        </div>
+    </div>  
+    <?php require_once 'View/html/footer.phtml'; ?>
+</body>
+
+</html>

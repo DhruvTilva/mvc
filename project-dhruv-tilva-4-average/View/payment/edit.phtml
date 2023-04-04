@@ -1,0 +1,65 @@
+<?php
+
+$url = new Model_Core_Url();
+$payment = $this->payment;
+
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+
+<body>
+    <?php require_once 'View/html/header.phtml' ?>
+
+    <div class="content-main">
+        <form action="<?php echo ($url->getUrl('payment','save',['id'=>$payment->payment_id]));?>" method="post">
+            <table>
+                <tr>
+                    <td>
+                        <h1>Save Payment Details</h1>
+                    </td>
+                    <td class="sub-head">
+                        <a href="<?php echo ($url->getUrl('payment','grid'));?>">Cancel</a>
+                        <button type="submit">Save</button>
+                    </td>
+                </tr>
+            </table>
+            <table border="2px" style="border-collapse: collapse">
+         
+                <tr>
+                    <td>Name: </td>
+                    <td><input type="text" name="payment[name]" value="<?php echo $payment->name;?>"></td>
+                </tr>
+                <tr>
+                    <td>Amount: </td>
+                    <td><input type="number" name="payment[amount]" value="<?php echo $payment->amount;?>"></td>
+                </tr>
+                
+                    <td>Status: </td>
+                    <td>
+                        <select name="payment[status]" >
+                        <?php foreach ($payment->getTable()->getStatusOptions() as $key => $value): ?>
+                            <?php $selected = ($key == $payment->getStatus()) ? 'selected':'' ?>
+                            <option <?php echo $selected; ?>><?php echo $value ?></option>
+                            <?php endforeach; ?>
+                    </select>
+                    </td>
+                </tr>
+                
+                
+            </table>
+        </form>
+    </div>
+        <?php require_once 'View/html/footer.phtml'; ?>
+
+</body>
+
+</html>

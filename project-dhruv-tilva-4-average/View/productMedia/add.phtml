@@ -1,0 +1,46 @@
+<?php
+$request=$this->getRequest();
+$products = $request->getParams('id');
+require_once 'Model/Core/Url.php';
+$url = new Model_Core_Url();
+// print_r($products);
+// die();
+
+
+ ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProductMedia</title>
+    
+</head>
+
+<body>
+	
+    <form action="Index.php?c=product_media&a=upload&id=<?php echo $products; ?>" method="post" enctype="multipart/form-data">
+	<table>
+		<tr class="button">
+			<td><h1>Adding Images.....</h1></td>
+           
+			<td>
+				<button type="submit" value="upload Image">Save</button>
+				<a href="<?php echo ($url->getUrl('product_media','grid'));?>">Cancel</a>
+			</td>
+		</tr>
+	</table>
+	<table border="1px">
+		<tr>
+			<td>Name: </td>
+			<td><input type="text" name="name"></td>
+		</tr>
+		<tr>
+			<td>Image: </td>
+			<td><input type="file" name="image"></td>
+		</tr>
+	</table>
+	</form>
+</body>
+</html>

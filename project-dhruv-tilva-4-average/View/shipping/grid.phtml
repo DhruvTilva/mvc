@@ -1,0 +1,74 @@
+<?php
+require_once 'Model/Core/Url.php';
+require_once 'Model/Core/Table/Row.php';
+$url = new Model_Core_Url();
+$shippings = $this->shippings;
+
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping</title>
+    <style>
+        .content-main{
+        border: 1px solid grey;
+        min-height: 500px;
+        height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <?php require_once 'View/html/header.phtml' ?>
+
+    <div class="content-main">
+        <div class="content">
+            <h2>Manage Shipping</h2>
+            <a href="<?php echo ($url->getUrl('shipping','add'));?>">Add Shipping</a>
+        </div>
+        <div>
+            <table border="1px">
+                <tr>
+                    <th style="width : 20px">Shipping_method_id</th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>inserted_at</th>
+                    <th>updated_at</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <?php
+                //feching data to form from database
+                foreach($shippings as $row){
+
+                ?>
+
+                <tr>
+                    <!-- all attributes of database -->
+                    <td><?php echo $row->shipping_id; ?></td>
+                    <td><?php echo $row->name; ?></td>
+                    <td><?php echo $row->amount; ?></td>
+                    <td><?php echo $row->getStatusText(); ?></td>
+                    <td><?php echo $row->inserted_at; ?></td>
+                    <td><?php echo $row->updated_at; ?></td>
+                    
+                    <td><a href="<?php echo ($url->getUrl('shipping','edit',['id'=>$row->shipping_id]));?>">edit</a></td>
+                    <td><a href="<?php echo ($url->getUrl('shipping','delete',['id'=>$row->shipping_id]));?>">delete</a></td>
+                </tr>
+                <?php
+                }
+                ?>
+            </table>
+        </div>
+    </div>
+       <?php require_once 'View/html/footer.phtml'; ?>
+
+</body>
+
+</html>

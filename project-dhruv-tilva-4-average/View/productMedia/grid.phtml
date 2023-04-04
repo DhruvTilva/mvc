@@ -1,0 +1,83 @@
+<?php 
+
+$medias = $this->getMedias();
+$request=$this->getRequest();
+$products = $request->getParams('id');
+require_once 'Model/Core/Url.php';
+require_once 'Model/Core/Table/Row.php';
+$url = new Model_Core_Url();
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProductMedia</title>
+    <style>
+        .content-main{
+        border: 1px solid grey;
+        min-height: 500px;
+        height: auto;
+        }
+        .size{
+        	height: 30px;
+        	width: 30px;
+        }
+        .image{
+        	height: 300px;
+        	width: 500px;
+        }
+
+    </style>
+</head>
+<body>
+	<?php require_once 'View/html/header.phtml' ?>
+	<div class="content-main">
+		<form action="Index.php?c=product_media&a=insert&id=<?php echo $id; ?>" method="post">
+	        <table class="content">
+	        	<tr>
+	        		<td><h1>ProductMedia</h1></td>
+	        		<td><button type="submit">Submit</button></td>
+	        		<td><a href="<?php echo ($url->getUrl('product','grid'));?>">Cancel</a></td>
+                    <td><a href="Index.php?c=product_media&a=add&id=<?php echo $products; ?>">Add Items</a></td>
+	        		
+	        	</tr>
+	        </table>
+	        <table border="2px" width="100%" style="border-collapse : collapse;">
+	        	<tr>
+	        		<th>Media_id</th>
+	        		<th class="size">Image</th>
+	        		<th>Name</th>
+	        		<th>Thumbnail</th>
+	        		<th>Small</th>
+	        		<th>Base</th>
+	        		<th>Gallery</th>
+	        		<th>Updated_at</th>
+	        		<th>Delete</th>
+	        	</tr>
+	        	<?php 
+	        	   foreach($medias as $row){
+	        	?>
+	        	<tr>
+	        		<th><?php echo $row->image_id ?></th>
+	        		<td><img class="image" src="View/productMedia/media/<?php echo $row->image ?>"></td>
+	        		<td><center><?php echo $row->name ?></center></td>
+	        		<td><center><input type="radio" name="thumb" value="<?php echo $row->image_id; ?>" <?php if($row->thumbnail == 1){ echo "checked"; } ?>></center></td>
+	        		<td><center><input type="radio" name="small" value="<?php echo $row->image_id; ?>" <?php if($row->small == 1){ echo "checked"; } ?>></center></td>
+	        		<td><center><input type="radio" name="base" value="<?php echo $row->image_id; ?>" <?php if($row->base == 1){ echo "checked"; } ?>></center></td>
+	        		<td><center><input type="checkbox" name="select[<?php echo $row->image_id ?>]" <?php if($row->gallery == 1){echo "checked";} ?>></center></td>
+	        		<td><center><?php echo $row->created_at ?></center></td>
+	        		<td><center><input type="checkbox" name="del[<?php echo $row->image_id ?>]" value="A"></center></td>
+	        	</tr>
+	        	<?php
+                }
+                ?>
+	        </table>
+        </form>
+	</div>
+	<?php require_once 'View/html/footer.phtml' ?>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?php 
+
+$url=Ccc::getModel('Core_Url');
+// print_r($url);
+// die();
+ ?>
+ <?php require_once 'View/html/header.phtml'; ?>
+            <h2>Add Admins</h2>
+
+	 <form action="<?php echo ($url->getUrl('admin','update'));?>" method="post">
+
+	<table width="100%" border="1" cellpadding="4">
+		<tr>
+	<input type="submit" name="submit" value="Save">
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td><input type="text" name="admin[email]">
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><input type="text" name="admin[password]">
+		</tr>
+		<tr>
+		<td>Status</td>
+		<td>
+			<select name="admin[status]">
+			<option value="1">Active</option>
+			<option value="2">Inactive</option>
+		</select>
+	</td>
+</tr>
+
+	</table>
+ <?php require_once 'View/html/footer.phtml'; ?>
+	
+
+
+</form>

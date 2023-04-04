@@ -1,0 +1,69 @@
+<?php
+require_once 'Model/Core/Url.php';
+require_once 'Model/Core/Message.php';
+require_once 'Model/Core/Session.php';
+$url=new Model_Core_Url();
+
+
+$messageModel=new Model_Core_Message();
+$messages=$messageModel->getMessages();
+
+
+if($messages){
+        foreach ($messages as $type => $message) {
+                echo "<p class='{$type}'>";
+                echo $message;
+                echo "</p>";
+        }
+}
+$messageModel->clearMessage();
+
+?>
+
+
+<style>
+        * {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+       .header {
+        display: flex;
+        justify-content: space-between;
+        max-width: 100%;
+        margin: 0 auto;
+        background: #DFCFBE;
+        padding: 10px 0;
+        border: 1px solid grey;
+        margin-bottom: 3px;
+
+       }
+       .header a{
+        color: black;
+        
+        padding: 30px;
+        
+        justify-content: center;
+        font-size: large;
+       }
+       .success{
+        background-color: lightgreen;
+       }
+       .failure{
+        background-color: red;
+       }
+       .notice{
+        background-color: orange;
+       }
+    </style>
+
+
+
+<div class="header">
+        <h2>CCC E-Commerce Portal</h2>
+	<a href="<?php echo ($url->getUrl('product','grid'));?>">Product</a>
+	<a href="<?php echo ($url->getUrl('category','grid'));?>">Category</a>
+	<a href="<?php echo ($url->getUrl('customer','grid'));?>">Customer</a>
+	<a href="<?php echo ($url->getUrl('vendor','grid'));?>">Vendor</a>
+	<a href="<?php echo ($url->getUrl('salesman','grid'));?>">Salesman</a>
+	<a href="<?php echo ($url->getUrl('shipping','grid'));?>">Shipping Method</a>
+	<a href="<?php echo ($url->getUrl('payment','grid'));?>">Payment Method</a>
+</div>

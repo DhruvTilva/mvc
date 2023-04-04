@@ -1,0 +1,121 @@
+<?php
+// $vendor = $this->getVendors();
+// require_once 'Model/Core/Url.php';
+$url = new Model_Core_Url();
+$vendor = $this->vendor;
+
+    
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  
+</head>
+
+<body>
+    <?php require_once 'View/html/header.phtml' ?>
+
+    <div class="content-main">
+        <form action="<?php echo ($url->getUrl('vendor','save',['id'=>$vendor->vendor_id]));?>" method="post">
+            <table>
+                <tr>
+                    <td>
+                        <h1>Save Vendor</h1>
+                    </td>
+                    <td class="sub-head">
+                        <a href="<?php echo ($url->getUrl('vendor','grid'));?>">Cancel</a>
+                        <button type="submit">Save</button>
+                    </td>
+                </tr>
+            </table>
+            <table border="2px" style="border-collapse: collapse">
+              
+               <!--  <tr>
+                    <td>vendor_id: </td>
+                    <td><?php echo $vendor->vendor_id;?></td>
+                </tr> -->
+                <tr>
+                    <td>First_name: </td>
+                    <td><input type="text" name="vendor[firstname]" value="<?php echo $vendor->firstname;?>"></td>
+                </tr>
+                <tr>
+                    <td>Last_name: </td>
+                    <td><input type="text" name="vendor[lastname]" value="<?php echo $vendor->lastname;?>"></td>
+                </tr>
+                <tr>
+                    <td>Email: </td>
+                    <td><input type="email" name="vendor[mail]" value="<?php echo $vendor->mail;?>"></td>
+                </tr>
+                <tr>
+                    <td>Gender: </td>
+                    <td>
+                        <input type="radio" name="vendor[gender]" value="M" <?php if($vendor->gender=='M'){echo"checked";}?>>Male <br>
+                        <input type="radio" name="vendor[gender]" value="F" <?php if($vendor->gender=='F'){echo"checked";}?>>Female <br>
+                       
+                </tr>
+                <tr>
+                    <td>Mobile: </td>
+                    <td><input type="number" name="vendor[no]" value="<?php echo $vendor->no;?>"></td>
+                </tr>
+                <tr>
+                    <td>Status: </td>
+                    <td>
+                        <select name="vendor[status]" >
+                        <?php foreach ($vendor->getTable()->getStatusOptions() as $key => $value): ?>
+                            <?php $selected = ($key == $vendor->getStatus()) ? 'selected':'' ?>
+                            <option <?php echo $selected; ?>><?php echo $value ?></option>
+                            <?php endforeach; ?>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Company: </td>
+                    <td><input type="text" name="vendor[company]" value="<?php echo $vendor->company;?>"></td>
+                </tr>
+               
+            </table>
+            <table broder="2px" style="border-collapse: collapse">
+              
+            <tr>
+                <th colspan="2"><h3>Address</h3></th>
+            </tr>
+            <tr>
+                <td>
+                    Address:
+                </td>
+                <td><textarea name="address[address]"><?php echo $vendor->address; ?></textarea></td>
+
+            </tr>
+            <tr>
+                <td>city:</td>
+                <td><input type="text" name="address[city]" value="<?php echo $vendor->city; ?>"></td>
+            </tr>
+            <tr>
+                <td>state:</td>
+                <td><input type="text" name="address[state]" value="<?php echo $vendor->state; ?>"></td>
+            </tr>
+            <tr>
+                <td>country:</td>
+                <td><input type="text" name="address[country]" value="<?php echo $vendor->country; ?>"></td>
+            </tr>
+            <tr>
+                <td>zipcode:</td>
+                <td><input type="text" name="address[zipcode]" value="<?php echo $vendor->zipcode; ?>"></td>
+            </tr>
+            
+            
+        </table>
+        </form>
+    </div>
+        <?php require_once 'View/html/footer.phtml'; ?>
+
+</body>
+
+</html>

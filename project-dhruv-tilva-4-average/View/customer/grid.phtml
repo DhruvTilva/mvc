@@ -1,0 +1,79 @@
+<?php
+$url=Ccc::getModel('Core_Url');
+
+$customers = $this->customers;
+
+// print_r($customers); die;
+
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer</title>
+    <style>
+        .content-main{
+        border: 1px solid grey;
+        min-height: 500px;
+        height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <?php require_once 'View/html/header.phtml' ?>
+    <div class="content-main">
+        <div class="content">
+            <h2>Manage Customer</h2>
+            <a href="<?php echo ($url->getUrl('customer','add'));?>">Add Customer</a>
+        </div>
+        <div>
+            <table border="1px">
+                <tr>
+                    <th>Customer_id</th>
+                    <th>First_name</th>
+                    <th>Last_name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Mobile</th>
+                    <th>Status</th>
+                    <th>inserted_at</th>
+                    <th>updated_at</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+               <?php
+                //feching data to form from database
+                foreach($customers as $row){
+
+                ?>
+
+                
+                <tr>
+                    <td><?php echo $row->customer_id; ?></td>
+                    <td><?php echo $row->firstname; ?></td>
+                    <td><?php echo $row->lastname; ?></td>
+                    <td><?php echo $row->email; ?></td>
+                    <td><?php echo $row->gender; ?></td>
+                    <td><?php echo $row->mobile; ?></td>
+                    <td><?php echo $row->getStatusText(); ?></td>
+                    <td><?php echo $row->inserted_at; ?></td>
+                    <td><?php echo $row->updated_at; ?></td>
+                    <td><a href="<?php echo ($url->getUrl('customer','edit',['id'=>$row->customer_id]));?>">edit</a></td>
+                    <td><a href="<?php echo ($url->getUrl('customer','delete',['id'=>$row->customer_id]));?>">delete</a></td>
+                </tr>
+                <?php
+                }
+                ?>
+            </table>
+        </div>
+    </div>
+       <?php require_once 'View/html/footer.phtml'; ?>
+
+</body>
+
+</html>
